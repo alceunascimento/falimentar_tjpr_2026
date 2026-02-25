@@ -1,0 +1,27 @@
+* text=auto eol=lf
+
+*.py    text eol=lf
+*.R     text eol=lf
+*.r     text eol=lf
+*.Rmd   text eol=lf
+*.qmd   text eol=lf
+*.sql   text eol=lf
+*.sh    text eol=lf
+*.ps1   text eol=lf
+*.csv   text eol=lf
+*.json  text eol=lf
+*.yaml  text eol=lf
+*.md    text eol=lf
+*.txt   text eol=lf
+
+*.png     binary
+*.jpg     binary
+*.pdf     binary
+*.xlsx    binary
+*.docx    binary
+*.parquet binary
+*.rds     binary
+*.RData   binary
+*.pkl     binary
+*.db      binary
+*.sqlite  binary

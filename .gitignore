@@ -1,0 +1,32 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# Dados sensíveis / pesados
+data/raw/
+data/
+data/*.csv
+data/raw/*.csv
+*.xlsx
+*.parquet
+*.db
+*.sqlite
+*.ndjson
+*.rds
+*.RDS
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/

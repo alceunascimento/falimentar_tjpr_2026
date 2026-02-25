@@ -1,0 +1,215 @@
+INFO [2026-02-24 18:53:08] Pipeline iniciado
+INFO [2026-02-24 18:53:08] SETUP | Iniciando configuração
+INFO [2026-02-24 18:53:08] SETUP | Carregando pacotes via pacman
+WARN [2026-02-24 18:53:08] SETUP | Pacotes ausentes serão instalados automaticamente (pode demorar)
+WARN [2026-02-24 18:53:09] SETUP | Se tiver que instarlar o duckdb vai demorar bastante, aguarde com paciência
+INFO [2026-02-24 18:53:14] SETUP | Pacotes carregados
+INFO [2026-02-24 18:53:14] SETUP | Carregando funções auxiliares
+INFO [2026-02-24 18:53:14] SETUP | Funções auxiliares carregadas
+INFO [2026-02-24 18:53:14] LOAD | Iniciando carregamento dos dados
+DEBUG [2026-02-24 18:53:14] CHECK | Verificando arquivos Parquet em data/parsed
+DEBUG [2026-02-24 18:53:14] CHECK | Resultado da verificação de parquet:
+            arquivo                                                         caminho existe status
+  processos.parquet  D:/projetos/falimentar_tjpr_2026/data/parsed/processos.parquet   TRUE     OK
+ movimentos.parquet D:/projetos/falimentar_tjpr_2026/data/parsed/movimentos.parquet   TRUE     OK
+   assuntos.parquet   D:/projetos/falimentar_tjpr_2026/data/parsed/assuntos.parquet   TRUE     OK
+INFO [2026-02-24 18:53:14] CHECK | Todos os arquivos Parquet estão disponíveis
+INFO [2026-02-24 18:53:14] LOAD | Conectando ao DuckDB e lendo parquet
+INFO [2026-02-24 18:53:26] LOAD | Dados carregados | tempo gasto: 18s
+INFO [2026-02-24 18:53:26] CHECK | Iniciando verificação de integridade
+DEBUG [2026-02-24 18:53:26] CHECK | glimpse df_processos:
+Rows: 61,471
+Columns: 10
+$ id                            <chr> "TJPR_G1_00169317820248160014", "TJPR_G1_00007963920248160192", "TJPR_G1_00000116519848160035", "TJPR_G1_00003419619968160017", "TJPR_G1_000…
+$ processo                      <chr> "00169317820248160014", "00007963920248160192", "00000116519848160035", "00003419619968160017", "00082026420058160035", "0000433541995816003…
+$ classe_codigo                 <dbl> 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, …
+$ classe_nome                   <chr> "Falência de Empresários, Sociedades Empresáriais, Microempresas e Empresas de Pequeno Porte", "Falência de Empresários, Sociedades Empresár…
+$ data_ajuizamento              <chr> "2024-03-19T11:05:46.000Z", "2024-03-26T16:19:18.000Z", "1984-06-08T00:00:00.000Z", "1996-04-18T00:00:00.000Z", "2005-06-02T00:00:00.000Z", …
+$ orgao_julgador_codigo         <dbl> 8799, 13752, 26422, 8809, 26404, 26404, 8892, 26422, 8816, 26422, 26422, 8816, 8809, 26422, 26404, 26404, 13950, 8988, 8809, 8809, 8809, 880…
+$ orgao_julgador_nome           <chr> "LONDRINA - 10ª VARA CÍVEL", "CASCAVEL - 4ª VARA CÍVEL", "CURITIBA - 2ª VARA DE FALÊNCIAS E RECUPERAÇÕES JUDICIAIS", "MARINGÁ - 3ª VARA CÍVE…
+$ orgao_julgador_municipio_ibge <dbl> 4113700, 4104808, 4106902, 4115200, 4106902, 4106902, 4108304, 4106902, 4119905, 4106902, 4106902, 4119905, 4115200, 4106902, 4106902, 41069…
+$ tribunal                      <chr> "TJPR", "TJPR", "TJPR", "TJPR", "TJPR", "TJPR", "TJPR", "TJPR", "TJPR", "TJPR", "TJPR", "TJPR", "TJPR", "TJPR", "TJPR", "TJPR", "TJPR", "TJP…
+$ grau                          <chr> "G1", "G1", "G1", "G1", "G1", "G1", "G1", "G1", "G1", "G1", "G1", "G1", "G1", "G1", "G1", "G1", "G1", "G1", "G1", "G1", "G1", "G1", "G1", "G…
+DEBUG [2026-02-24 18:53:26] CHECK | glimpse df_movimentos:
+Rows: 8,355,897
+Columns: 9
+$ id                    <chr> "TJPR_G1_00007963920248160192", "TJPR_G1_00007963920248160192", "TJPR_G1_00007963920248160192", "TJPR_G1_00007963920248160192", "TJPR_G1_00007963920…
+$ processo              <chr> "00007963920248160192", "00007963920248160192", "00007963920248160192", "00007963920248160192", "00007963920248160192", "00007963920248160192", "000…
+$ movimento_codigo      <chr> "85", "26", "123", "581", "581", "51", "51", "581", "51", "60", "85", "51", "60", "51", "123", "36", "85", "51", "60", "85", "123", "26", "581", "60…
+$ movimento_nome        <chr> "Petição", "Distribuição", "Remessa", "Documento", "Documento", "Conclusão", "Conclusão", "Documento", "Conclusão", "Expedição de documento", "Petiç…
+$ movimento_data_hora   <chr> "2024-03-26T16:19:18.000Z", "2024-03-26T16:19:20.000Z", "2024-03-26T16:19:20.000Z", "2024-03-26T17:23:06.000Z", "2024-03-26T17:56:21.000Z", "2024-03…
+$ complemento_codigo    <dbl> 19, 2, 18, 4, 4, 3, 3, 4, 3, 4, 19, 3, 4, 3, 18, 2, 19, 3, 4, 19, 18, 2, 4, 4, 4, 4, 3, 4, 19, 4, 4, 19, 4, 4, 4, 4, 4, 3, 4, 4, 3, 4, 19, 4, 18, 4,…
+$ complemento_nome      <chr> "Petição inicial", "competência exclusiva", "em diligência", "Informações", "Certidão", "para decisão", "para decisão", "Certidão", "para decisão", …
+$ complemento_valor     <chr> "58", "1", "37", "116", "107", "6", "6", "107", "6", "80", "57", "6", "80", "5", "37", "2", "57", "5", "80", "58", "37", "2", "80", "80", "80", "80"…
+$ complemento_descricao <chr> "tipo_de_peticao", "tipo_de_distribuicao_redistribuicao", "motivo_da_remessa", "tipo_de_documento", "tipo_de_documento", "tipo_de_conclusao", "tipo_…
+DEBUG [2026-02-24 18:53:26] CHECK | glimpse df_assuntos:
+Rows: 63,016
+Columns: 4
+$ id             <chr> "TJPR_G1_00169317820248160014", "TJPR_G1_00007963920248160192", "TJPR_G1_00000116519848160035", "TJPR_G1_00003419619968160017", "TJPR_G1_000820264200581600…
+$ processo       <chr> "00169317820248160014", "00007963920248160192", "00000116519848160035", "00003419619968160017", "00082026420058160035", "00004335419958160035", "0000908251…
+$ assunto_codigo <dbl> 4998, 4998, 4998, 9556, 4998, 4998, 9556, 5000, 9556, 5000, 4998, 7703, 9556, 4998, 4998, 4998, 9556, 4998, 4998, 9607, 4998, 4998, 4998, 4998, 9558, 11783…
+$ assunto_nome   <chr> "Autofalência", "Autofalência", "Autofalência", "Convolação de recuperação judicial em falência", "Autofalência", "Autofalência", "Convolação de recuperaçã…
+INFO [2026-02-24 18:53:26] CHECK | Verificando perfil de dados temporais
+DEBUG [2026-02-24 18:53:26] CHECK | perfil data_ajuizamento (df_processos):
+# A tibble: 2 × 3
+  perfil                 n exemplos                                                                                                                            
+  <chr>              <int> <chr>                                                                                                                               
+1 num_yyyymmddhhmmss 60778 20230522230301 | 20250414151934 | 20240717171140 | 20020926000000 | 20041202000000                                                  
+2 iso8601_Z            693 2024-03-19T11:05:46.000Z | 2024-03-26T16:19:18.000Z | 1984-06-08T00:00:00.000Z | 1996-04-18T00:00:00.000Z | 2005-06-02T00:00:00.000Z
+DEBUG [2026-02-24 18:53:28] CHECK | perfil movimento_data_hora (df_movimentos) — pode levar tempo:
+# A tibble: 1 × 3
+  perfil          n exemplos                                                                                                                            
+  <chr>       <int> <chr>                                                                                                                               
+1 iso8601_Z 8355897 2024-03-26T16:19:18.000Z | 2024-03-26T16:19:20.000Z | 2024-03-26T17:23:06.000Z | 2024-03-26T17:56:21.000Z | 2024-03-27T01:07:33.000Z
+INFO [2026-02-24 18:54:26] CHECK | Verificando dados faltantes (NA)
+DEBUG [2026-02-24 18:54:27] CHECK | Tabela de NAs:
+# A tibble: 3 × 6
+  dataframe     n_linhas n_colunas n_celulas_na pct_celulas_na n_colunas_com_na
+  <chr>            <int>     <int>        <dbl>          <dbl>            <int>
+1 df_processos     61471        10            0          0                    0
+2 df_movimentos  8355897         9     19760296          0.263                4
+3 df_assuntos      63016         4            0          0                    0
+WARN [2026-02-24 18:54:27] CHECK | NAs presentes | células ausentes: 19760296
+INFO [2026-02-24 18:54:27] CHECK | Executando QA em df_processos e df_assuntos
+DEBUG [2026-02-24 18:54:27] CHECK | Tabela QA crítica:
+# A tibble: 2 × 7
+  dataframe    linhas colunas linhas_com_na colunas_com_na celulas_na status
+  <chr>         <int>   <int>         <int>          <int>      <int> <chr> 
+1 df_processos  61471      10             0              0          0 OK    
+2 df_assuntos   63016       4             0              0          0 OK    
+INFO [2026-02-24 18:54:27] CHECK | QA OK: df_processos e df_assuntos sem NAs
+INFO [2026-02-24 18:54:27] CHECK | Executando QA em df_movimentos
+DEBUG [2026-02-24 18:54:29] CHECK | Tabela QA movimentos:
+# A tibble: 1 × 9
+  dataframe      linhas linhas_com_na_obrigatorio celulas_na_obrigatorio status_obrigatorio linhas_sem_complemento celulas_na_complemento status_complemento mensagem               
+  <chr>           <int>                     <int>                  <int> <chr>                               <int>                  <int> <chr>              <chr>                  
+1 df_movimentos 8355897                         0                      0 OK                                4940074               19760296 OK                 Obrigatórias OK; 49400…
+INFO [2026-02-24 18:54:30] CHECK | df_movimentos | Obrigatórias OK; 4940074 linhas sem complemento
+INFO [2026-02-24 18:54:30] CHECK | QA OK: df_movimentos íntegro (NAs aceitos em complemento_*)
+INFO [2026-02-24 18:54:30] CHECK | Verificações de integridade concluídas
+INFO [2026-02-24 18:54:30] CLEAN | Iniciando limpeza dos dataframes
+INFO [2026-02-24 18:54:30] CLEAN | df_processos | Ajustando tipos e variáveis temporais
+INFO [2026-02-24 18:54:31] CLEAN | df_processos | Tipos ajustados e variáveis de data criadas
+DEBUG [2026-02-24 18:54:31] CLEAN | df_processos | CHECK [1] tipo de data_ajuizamento_raw: character
+DEBUG [2026-02-24 18:54:31] CLEAN | df_processos | data_ajuizamento_raw não é numérico (esperado)
+INFO [2026-02-24 18:54:31] CLEAN | df_processos | CHECK [2] parse datas | total: 61471 | ok: 61471 | erro: 0
+INFO [2026-02-24 18:54:31] CLEAN | df_processos | CHECK [3] intervalo data_ajuizamento | min: 1938-03-31 | max: 2025-12-31 17:08:00
+DEBUG [2026-02-24 18:54:31] CLEAN | df_processos | CHECK [4] distribuição hora zero:
+  eh_meianoite raw_meianoite      n percentual                                            significado
+1        FALSE         FALSE 35,831      58.3%            Data com hora na origem (datetime completo)
+2         TRUE         FALSE 25,132      40.9%   Data sem hora na origem (formato raw YYYYMMDD000000)
+3         TRUE          TRUE    508       0.8% Data sem hora na origem (formato raw ISO com 00:00:00)
+INFO [2026-02-24 18:54:31] CLEAN | df_processos | CHECK de datas concluído
+INFO [2026-02-24 18:54:31] CLEAN | df_processos | ADD DATA | Consultando API IBGE para municípios
+INFO [2026-02-24 18:54:38] CLEAN | df_processos | ADD DATA | API IBGE concluída | 142 municípios | elapsed: 90.5s
+DEBUG [2026-02-24 18:54:38] CLEAN | df_processos | ADD DATA | municípios: Londrina, Cascavel, Curitiba, Maringá, Foz do Iguaçu, Ponta Grossa, Bocaiúva do Sul, Cambé, Campo Mourão, Formosa do Oeste, Mandaguari, Palmas, Siqueira Campos, Toledo, Nova Esperança, Palotina, Ibiporã, Rolândia, Medianeira, São José dos Pinhais, Arapongas, Pato Branco, Santa Mariana, Astorga, Capitão Leônidas Marques, Ibaiti, Pontal do Paraná, Guarapuava, Loanda, Reserva, Jaguapitã, Cianorte, Umuarama, Iporã, Palmeira, Araucária, Paranaguá, São Miguel do Iguaçu, Coronel Vivida, Pinhais, Francisco Beltrão, Apucarana, Sengés, Rio Negro, Paranavaí, Matinhos, Joaquim Távora, Irati, Jacarezinho, Marialva, Pérola, Cambará, Jaguariaíva, Sarandi, Chopinzinho, Cornélio Procópio, Sertanópolis, Ivaiporã, Lapa, União da Vitória, Colombo, Prudentópolis, Marilândia do Sul, Campina Grande do Sul, Telêmaco Borba, Laranjeiras do Sul, Piraquara, Goioerê, Colorado, Mallet, Paranacity, Marechal Cândido Rondon, Andirá, Almirante Tamandaré, Quedas do Iguaçu, Jandaia do Sul, Morretes, São Mateus do Sul, Faxinal, Clevelândia, Catanduvas, Campo Largo, Realeza, Castro, Nova Londrina, Bela Vista do Paraíso, Santo Antônio da Platina, Bandeirantes, Pitanga, Guaratuba, Santo Antônio do Sudoeste, São Jerônimo da Serra, Peabiru, Alto Piquiri, Curiúva, Imbituva, Engenheiro Beltrão, Dois Vizinhos, Paiçandu, Corbélia, Grandes Rios, Assaí, Rio Branco do Sul, Mandaguaçu, Congonhinhas, Palmital, Nova Fátima, Santa Isabel do Ivaí, Ribeirão do Pinhal, Mamborê, Centenário do Sul, Ubiratã, Barracão, Antonina, Matelândia, Porecatu, Cruzeiro do Oeste, Terra Rica, São João, Uraí, Fazenda Rio Grande, Salto do Lontra, Rebouças, Cidade Gaúcha, Marmeleiro, Mangueirinha, Guaíra, Terra Roxa, Pinhão, Campina da Lagoa, Cerro Azul, Terra Boa, Tomazina, Icaraíma, Assis Chateaubriand, Ampére, Piraí do Sul, Altônia, Santa Fé, Santa Helena, Wenceslau Braz, Manoel Ribas
+INFO [2026-02-24 18:54:38] CLEAN | df_processos | Join IBGE concluído
+DEBUG [2026-02-24 18:54:38] CLEAN | df_processos | glimpse pós-ajuste:
+Rows: 61,471
+Columns: 14
+$ id                            <chr> "TJPR_G1_00169317820248160014", "TJPR_G1_00007963920248160192", "TJPR_G1_00000116519848160035", "TJPR_G1_00003419619968160017", "TJPR_G1_000…
+$ processo                      <chr> "00169317820248160014", "00007963920248160192", "00000116519848160035", "00003419619968160017", "00082026420058160035", "0000433541995816003…
+$ classe_codigo                 <fct> 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, …
+$ classe_nome                   <fct> "Falência de Empresários, Sociedades Empresáriais, Microempresas e Empresas de Pequeno Porte", "Falência de Empresários, Sociedades Empresár…
+$ data_ajuizamento              <dttm> 2024-03-19 11:05:46, 2024-03-26 16:19:18, 1984-06-08 00:00:00, 1996-04-18 00:00:00, 2005-06-02 00:00:00, 1995-08-25 00:00:00, 1995-02-06 00…
+$ orgao_julgador_codigo         <fct> 8799, 13752, 26422, 8809, 26404, 26404, 8892, 26422, 8816, 26422, 26422, 8816, 8809, 26422, 26404, 26404, 13950, 8988, 8809, 8809, 8809, 880…
+$ orgao_julgador_nome           <fct> "LONDRINA - 10ª VARA CÍVEL", "CASCAVEL - 4ª VARA CÍVEL", "CURITIBA - 2ª VARA DE FALÊNCIAS E RECUPERAÇÕES JUDICIAIS", "MARINGÁ - 3ª VARA CÍVE…
+$ orgao_julgador_municipio_ibge <int> 4113700, 4104808, 4106902, 4115200, 4106902, 4106902, 4108304, 4106902, 4119905, 4106902, 4106902, 4119905, 4115200, 4106902, 4106902, 41069…
+$ tribunal                      <fct> TJPR, TJPR, TJPR, TJPR, TJPR, TJPR, TJPR, TJPR, TJPR, TJPR, TJPR, TJPR, TJPR, TJPR, TJPR, TJPR, TJPR, TJPR, TJPR, TJPR, TJPR, TJPR, TJPR, TJ…
+$ grau                          <fct> G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, G1, …
+$ data_ajuizamento_raw          <chr> "2024-03-19T11:05:46.000Z", "2024-03-26T16:19:18.000Z", "1984-06-08T00:00:00.000Z", "1996-04-18T00:00:00.000Z", "2005-06-02T00:00:00.000Z", …
+$ ano_ajuizamento               <dbl> 2024, 2024, 1984, 1996, 2005, 1995, 1995, 2009, 2025, 1999, 2023, 2025, 2024, 2002, 2004, 2007, 2013, 2000, 2013, 2012, 2017, 2006, 2011, 20…
+$ mes_ajuizamento               <dbl> 3, 3, 6, 4, 6, 8, 2, 6, 4, 12, 5, 4, 7, 9, 12, 12, 7, 9, 8, 6, 10, 7, 11, 9, 7, 9, 6, 12, 9, 1, 12, 10, 6, 9, 9, 12, 11, 12, 10, 12, 5, 11, …
+$ municipio_nome                <chr> "Londrina", "Cascavel", "Curitiba", "Maringá", "Curitiba", "Curitiba", "Foz do Iguaçu", "Curitiba", "Ponta Grossa", "Curitiba", "Curitiba", …
+INFO [2026-02-24 18:54:38] CLEAN | df_movimentos | Ajustando tipos e variáveis temporais
+INFO [2026-02-24 18:55:51] CLEAN | df_movimentos | Tipos ajustados e variáveis de data criadas
+DEBUG [2026-02-24 18:55:51] CLEAN | df_movimentos | CHECK [1] tipo de movimento_data_hora: POSIXct, POSIXt
+DEBUG [2026-02-24 18:55:51] CLEAN | df_movimentos | movimento_data_hora não é numérico (esperado)
+INFO [2026-02-24 18:55:51] CLEAN | df_movimentos | CHECK [2] parse datas | total: 8355897 | ok: 8355897 | erro: 0
+INFO [2026-02-24 18:55:54] CLEAN | df_movimentos | CHECK [3] intervalo movimento_data_hora | min: 1967-06-06 | max: 2026-01-31 21:53:32
+DEBUG [2026-02-24 18:56:28] CLEAN | df_movimentos | CHECK [4] distribuição hora zero:
+  eh_meianoite raw_meianoite         n percentual                                            significado
+1        FALSE         FALSE 8,353,550     100.0%            Data com hora na origem (datetime completo)
+2         TRUE          TRUE     2,347       0.0% Data sem hora na origem (formato raw ISO com 00:00:00)
+INFO [2026-02-24 18:56:28] CLEAN | df_movimentos | CHECK de datas concluído
+DEBUG [2026-02-24 18:56:28] CLEAN | df_movimentos | glimpse pós-ajuste:
+Rows: 8,355,897
+Columns: 12
+$ id                      <chr> "TJPR_G1_00007963920248160192", "TJPR_G1_00007963920248160192", "TJPR_G1_00007963920248160192", "TJPR_G1_00007963920248160192", "TJPR_G1_000079639…
+$ processo                <chr> "00007963920248160192", "00007963920248160192", "00007963920248160192", "00007963920248160192", "00007963920248160192", "00007963920248160192", "0…
+$ movimento_codigo        <fct> 85, 26, 123, 581, 581, 51, 51, 581, 51, 60, 85, 51, 60, 51, 123, 36, 85, 51, 60, 85, 123, 26, 581, 60, 581, 581, 51, 60, 85, 581, 60, 85, 581, 60,…
+$ movimento_nome          <fct> "Petição", "Distribuição", "Remessa", "Documento", "Documento", "Conclusão", "Conclusão", "Documento", "Conclusão", "Expedição de documento", "Pet…
+$ movimento_data_hora     <dttm> 2024-03-26 16:19:18, 2024-03-26 16:19:20, 2024-03-26 16:19:20, 2024-03-26 17:23:06, 2024-03-26 17:56:21, 2024-03-27 01:07:33, 2024-06-13 01:02:26…
+$ complemento_codigo      <fct> 19, 2, 18, 4, 4, 3, 3, 4, 3, 4, 19, 3, 4, 3, 18, 2, 19, 3, 4, 19, 18, 2, 4, 4, 4, 4, 3, 4, 19, 4, 4, 19, 4, 4, 4, 4, 4, 3, 4, 4, 3, 4, 19, 4, 18, …
+$ complemento_nome        <fct> Petição inicial, competência exclusiva, em diligência, Informações, Certidão, para decisão, para decisão, Certidão, para decisão, Outros documento…
+$ complemento_valor       <fct> 58, 1, 37, 116, 107, 6, 6, 107, 6, 80, 57, 6, 80, 5, 37, 2, 57, 5, 80, 58, 37, 2, 80, 80, 80, 80, 5, 80, 57, 80, 80, 57, 80, 170, 107, 107, 80, 5,…
+$ complemento_descricao   <fct> tipo_de_peticao, tipo_de_distribuicao_redistribuicao, motivo_da_remessa, tipo_de_documento, tipo_de_documento, tipo_de_conclusao, tipo_de_conclusa…
+$ movimento_data_hora_raw <chr> "2024-03-26T16:19:18.000Z", "2024-03-26T16:19:20.000Z", "2024-03-26T16:19:20.000Z", "2024-03-26T17:23:06.000Z", "2024-03-26T17:56:21.000Z", "2024-…
+$ movimento_mes           <dttm> 2024-03-01, 2024-03-01, 2024-03-01, 2024-03-01, 2024-03-01, 2024-03-01, 2024-06-01, 2024-06-01, 2024-06-01, 2024-07-01, 2024-08-01, 2024-08-01, 2…
+$ movimento_ano           <dbl> 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2012, 2012, 2012, 2012, 2012, 20…
+INFO [2026-02-24 18:56:29] CLEAN | df_assuntos | Ajustando tipos
+INFO [2026-02-24 18:56:29] CLEAN | df_assuntos | Tipos ajustados
+DEBUG [2026-02-24 18:56:29] CLEAN | df_assuntos | glimpse pós-ajuste:
+Rows: 63,016
+Columns: 4
+$ id             <chr> "TJPR_G1_00169317820248160014", "TJPR_G1_00007963920248160192", "TJPR_G1_00000116519848160035", "TJPR_G1_00003419619968160017", "TJPR_G1_000820264200581600…
+$ processo       <chr> "00169317820248160014", "00007963920248160192", "00000116519848160035", "00003419619968160017", "00082026420058160035", "00004335419958160035", "0000908251…
+$ assunto_codigo <fct> 4998, 4998, 4998, 9556, 4998, 4998, 9556, 5000, 9556, 5000, 4998, 7703, 9556, 4998, 4998, 4998, 9556, 4998, 4998, 9607, 4998, 4998, 4998, 4998, 9558, 11783…
+$ assunto_nome   <fct> "Autofalência", "Autofalência", "Autofalência", "Convolação de recuperação judicial em falência", "Autofalência", "Autofalência", "Convolação de recuperaçã…
+INFO [2026-02-24 18:56:29] CLEAN | Limpeza dos dataframes concluída
+INFO [2026-02-24 18:56:29] OUTPUT | Executado via source() — dataframes disponíveis no ambiente chamador | RDS não gerado
+INFO [2026-02-24 18:56:29] SUMMARY | Gerando resumo estatístico dos dataframes
+INFO [2026-02-24 18:56:32] SUMMARY | df_processos:
+Rows: 1
+Columns: 9
+$ n_processos  <int> 61471
+$ n_tribunais  <int> 1
+$ n_classes    <int> 5
+$ n_municipios <int> 142
+$ ano_min      <dbl> 1938
+$ ano_max      <dbl> 2025
+$ data_min     <dttm> 1938-03-31
+$ data_max     <dttm> 2025-12-31 17:08:00
+$ pct_sem_hora <dbl> 0.4171073
+INFO [2026-02-24 18:56:32] SUMMARY | df_movimentos:
+Rows: 1
+Columns: 7
+$ n_movimentos        <int> 8355897
+$ n_processos_uniq    <int> 61373
+$ n_tipos_movimento   <int> 219
+$ data_min            <dttm> 1967-06-06
+$ data_max            <dttm> 2026-01-31 21:53:32
+$ media_mov_processo  <dbl> 136.1494
+$ pct_com_complemento <dbl> 0.4087919
+INFO [2026-02-24 18:56:32] SUMMARY | df_assuntos:
+Rows: 1
+Columns: 4
+$ n_vinculos         <int> 63016
+$ n_processos_uniq   <int> 61373
+$ n_assuntos_uniq    <int> 257
+$ media_ass_processo <dbl> 1.026771
+INFO [2026-02-24 18:56:32] Pipeline encerrado com sucesso | tempo gasto: 203.74s | fim: 2026-02-24 18:56:32
+INFO [2026-02-24 19:05:08] SUMMARY | df_processos:
+Rows: 1
+Columns: 11
+$ n_processos      <int> 61471
+$ n_processos_uniq <int> 61373
+$ n_tribunais      <int> 1
+$ tribunal         <fct> TJPR
+$ n_classes        <int> 5
+$ n_municipios     <int> 142
+$ ano_min          <dbl> 1938
+$ ano_max          <dbl> 2025
+$ data_min         <dttm> 1938-03-31
+$ data_max         <dttm> 2025-12-31 17:08:00
+$ pct_sem_hora     <dbl> 0.4171073
+INFO [2026-02-24 19:08:14] SUMMARY | df_movimentos:
+Rows: 1
+Columns: 7
+$ n_processos_uniq    <int> 61373
+$ n_movimentos        <int> 8355897
+$ n_tipos_movimento   <int> 219
+$ data_min            <dttm> 1967-06-06
+$ data_max            <dttm> 2026-01-31 21:53:32
+$ media_mov_processo  <dbl> 136.1494
+$ pct_com_complemento <dbl> 0.4087919
