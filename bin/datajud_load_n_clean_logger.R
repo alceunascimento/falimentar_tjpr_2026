@@ -367,6 +367,15 @@ if (any(tabela_qa_critica$status == "ERRO")) {
 ## QA df_movimentos ----
 log_info("CHECK | Executando QA em df_movimentos")
 
+movimentos_vazios <- df_movimentos |>
+  filter(as.character(movimento_codigo) == "{}" | is.na(movimento_codigo))
+
+if (nrow(movimentos_vazios) > 0) {
+  log_warn("CHECK | {nrow(movimentos_vazios)} movimento(s) com codigo vazio — IDs: {paste(movimentos_vazios$id, collapse = ', ')}")
+} else {
+  log_info("CHECK | Nenhum movimento com codigo vazio")
+}
+
 tabela_qa_mov <- qa_movimentos(df_movimentos)
 
 log_debug("CHECK | Tabela QA movimentos:\n{paste(capture.output(print(tabela_qa_mov)), collapse = '\n')}")
@@ -379,6 +388,8 @@ if (tabela_qa_mov$status_obrigatorio == "ERRO") {
 } else {
   log_info("CHECK | QA OK: df_movimentos íntegro (NAs aceitos em complemento_*)")
 }
+
+
 
 log_info("CHECK | Verificações de integridade concluídas")
 

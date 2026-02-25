@@ -1,9 +1,39 @@
+# .gitignore
+
+# DIRETORIOS E ARQUIVOS DO PROJETO ----------------------------
+
+# diretorios grandes de dados e analises
+data/
+data/raw/
+data_mni/
+dados_processos/
+output/
+
+# arquivos grandes de dados
+*.parquet
+*.db
+*.sqlite
+*.json
+*.ndjson
+*.rds
+*.RDS
+
+# outros diretorios e arquivos
+abj2016/
+
+
+# DIRETORIOS E ARQUIVOS DO SISTEMA ----------------------------
+
+# geral
+.env
+*.log
+*.html
+
 # Python
 venv/
 __pycache__/
 *.pyc
 *.pyo
-.env
 
 # R
 .Rhistory
@@ -11,18 +41,9 @@ __pycache__/
 .Rproj.user/
 *.Rproj
 
-# Dados sensíveis / pesados
-data/raw/
-data/
-data/*.csv
-data/raw/*.csv
-*.xlsx
-*.parquet
-*.db
-*.sqlite
-*.ndjson
-*.rds
-*.RDS
+# Quarto
+*.csl
+*.bib
 
 # OS
 .DS_Store
@@ -30,3 +51,5 @@ Thumbs.db
 
 # VS Code
 .vscode/
+
+#eof----------------------------------------------------------
